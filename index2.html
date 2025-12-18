@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue de vidéos pédagogiques</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background: #f7f9fb; color: #1f2a37; }
+
+    /* HERO */
+    .hero {
+      min-height: 52vh;
+      background: linear-gradient(rgba(7, 18, 32, 0.62), rgba(7, 18, 32, 0.62)),
+        url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=60")
+        center/cover no-repeat;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+    }
+    .hero-content { text-align: center; color: #fff; max-width: 900px; }
+    .hero h1 { font-size: clamp(1.9rem, 3vw, 2.6rem); margin-bottom: 10px; }
+    .hero p { font-size: clamp(1rem, 1.4vw, 1.15rem); opacity: 0.95; margin-bottom: 18px; }
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 22px;
+      background: #0b6efd;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    /* LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+    h2 { font-size: 1.8rem; margin-bottom: 18px; }
+
+    /* FILTERS */
+    .filters-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 249, 251, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 14px 0 18px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      margin-bottom: 22px;
+    }
+
+    .filters-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .filters-header .subtitle { color: #64748b; font-size: 0.95rem; }
+    .filters-header .count { color: #0f172a; font-weight: 700; font-size: 0.95rem; }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .filter {
+      border: 1px solid rgba(11, 110, 253, 0.25);
+      background: #fff;
+      color: #0b6efd;
+      font-weight: 800;
+      padding: 7px 12px;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: transform 120ms ease, background 120ms ease, color 120ms ease, border-color 120ms ease;
+      user-select: none;
+    }
+    .filter:hover { transform: translateY(-1px); border-color: rgba(11, 110, 253, 0.45); }
+    .filter.active { background: #0b6efd; color: #fff; border-color: #0b6efd; }
+
+    /* GRID 2 COLONNES */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+
+    .video-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 10px 26px rgba(2, 6, 23, 0.08);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+
+    .video-wrapper { position: relative; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #0b1220; }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .video-title { margin-top: 12px; font-size: 1.05rem; line-height: 1.25; }
+    .video-meta { margin-top: 6px; font-size: 0.92rem; color: #64748b; }
+
+    .empty-state {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px dashed rgba(15, 23, 42, 0.2);
+      border-radius: 12px;
+      color: #475569;
+      background: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Catalogue de vidéos pédagogiques</h1>
+      <p>Ressources vidéos – contexte médical (contenus pédagogiques).</p>
+      <a href="#catalogue" class="btn-primary">Découvrir</a>
+    </div>
+  </header>
+
+  <section id="catalogue" class="container">
+    <h2>Vidéos</h2>
+
+    <!-- FILTRES (générés automatiquement 1..15 + Tous) -->
+    <div class="filters-bar">
+      <div class="filters-header">
+        <div class="subtitle">Filtrer par numéro de “Vidéo” (1 à 15)</div>
+        <div class="count" id="visibleCount">0 vidéo</div>
+      </div>
+      <div class="categories" id="filters"></div>
+    </div>
+
+    <!-- LISTE VIDEOS -->
+    <div class="video-grid" id="videoGrid">
+
+      <!-- IMPORTANT :
+           Le titre doit commencer par "Vidéo X" (X=1..15)
+           Exemple: "Vidéo 2 (Patient 1) - ..."
+      -->
+
+      <!-- Vidéo 1 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098816110" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 1"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 1 – Le stress post-traumatique, l’anxiété et la dépression chez les proches</h3>
+  <div class="video-meta">Groupe 1</div>
+</div>
+
+<!-- Vidéo 2 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098816505" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 2 (Patient 1)"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 2 – Après la réanimation : rééducation et soutien à long terme</h3>
+  <div class="video-meta">Groupe 2</div>
+</div>
+
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098809683" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 2 (Patient 2)"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 2 (Patient 1) – Après la réanimation : rééducation et soutien à long terme</h3>
+  <div class="video-meta">Groupe 2</div>
+</div>
+
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098810150" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 2"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 2 (Patient 2) – Après la réanimation : rééducation et soutien à long terme</h3>
+  <div class="video-meta">Groupe 2</div>
+</div>
+
+<!-- Vidéo 3 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098811310" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 3"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 3 – La réanimation, ses équipements et son fonctionnement</h3>
+  <div class="video-meta">Groupe 3</div>
+</div>
+
+<!-- Vidéo 4 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098811496" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 4"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 4 – Spécificité de la réanimation</h3>
+  <div class="video-meta">Groupe 4</div>
+</div>
+
+<!-- Vidéo 5 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1099369560" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 5"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 5 – Le rôle de l’équipe pluridisciplinaire</h3>
+  <div class="video-meta">Groupe 5</div>
+</div>
+
+<!-- Vidéo 6 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1128796674" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 6"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 6 – Parler de la réanimation avec ses enfants</h3>
+  <div class="video-meta">Groupe 6</div>
+</div>
+
+<!-- Vidéo 7 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1128797584" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 7 (Partie 1)"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 7 (Partie 1) – Comprendre le traumatisme crânien grave</h3>
+  <div class="video-meta">Groupe 7</div>
+</div>
+
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1128797878" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 7 (Partie 2)"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 7 (Partie 2) – Comprendre l’hémorragie</h3>
+  <div class="video-meta">Groupe 7</div>
+</div>
+
+<!-- Vidéo 8 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1128798390" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 8"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 8 – Comprendre l’accident vasculaire cérébral (AVC)</h3>
+  <div class="video-meta">Groupe 8</div>
+</div>
+
+<!-- Vidéo 9 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1125843903" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 9"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 9 – Les états de conscience</h3>
+  <div class="video-meta">Groupe 9</div>
+</div>
+
+<!-- Vidéo 10 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1128798697" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 10"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 10 – Décisions éthiques en réanimation</h3>
+  <div class="video-meta">Groupe 10</div>
+</div>
+
+<!-- Vidéo 11 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098815585" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 11"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 11 – Le don d’organes</h3>
+  <div class="video-meta">Groupe 11</div>
+</div>
+
+<!-- Vidéo 12 -->
+<div class="video-card">
+  <div class="video-wrapper">
+    <iframe src="https://player.vimeo.com/video/1098815679" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+      title="Vidéo 12"></iframe>
+  </div>
+  <h3 class="video-title">Vidéo 12 – Aide juridique et financière</h3>
+  <div class="video-meta">Groupe 12</div>
+</div>
+
+
+
+      <!-- Duplique les .video-card autant que nécessaire -->
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      Aucune vidéo ne correspond à ce filtre.
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filtersRoot = document.getElementById("filters");
+      const cards = Array.from(document.querySelectorAll(".video-card"));
+      const visibleCountEl = document.getElementById("visibleCount");
+      const emptyStateEl = document.getElementById("emptyState");
+
+      // 1) Génère les boutons : Tous + 1..15
+      const makeBtn = (label, value, isActive = false) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "filter" + (isActive ? " active" : "");
+        b.dataset.filter = value;
+        b.textContent = label;
+        return b;
+      };
+
+      filtersRoot.appendChild(makeBtn("Tous", "all", true));
+      for (let i = 1; i <= 12; i++) {
+        filtersRoot.appendChild(makeBtn(String(i), String(i), false));
+      }
+
+      const filterButtons = Array.from(document.querySelectorAll(".filter"));
+
+      // 2) Calcule automatiquement le "groupe" à partir du titre "Vidéo X ..."
+      //    Regex robuste: accepte Video/Vidéo, espaces, et capte le nombre 1..15 (ou plus si tu veux)
+      const extractGroup = (title) => {
+        const txt = (title || "").trim();
+        const m = txt.match(/^\s*vid[eé]o\s*(\d+)\b/i);
+        return m ? m[1] : null;
+      };
+
+      cards.forEach(card => {
+        const titleEl = card.querySelector(".video-title");
+        const group = extractGroup(titleEl ? titleEl.textContent : "");
+        card.dataset.group = group || ""; // vide si non trouvé
+      });
+
+      // 3) Applique le filtre
+      const applyFilter = (value) => {
+        let visible = 0;
+
+        cards.forEach(card => {
+          const g = card.dataset.group; // "1", "2", ...
+          const show = (value === "all") ? true : (g === value);
+
+          card.style.display = show ? "" : "none";
+          if (show) visible++;
+        });
+
+        visibleCountEl.textContent = visible + (visible > 1 ? " vidéos" : " vidéo");
+        emptyStateEl.style.display = (visible === 0) ? "block" : "none";
+      };
+
+      // 4) Click handlers
+      filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          applyFilter(btn.dataset.filter);
+        });
+      });
+
+      // Initial
+      applyFilter("all");
+    });
+  </script>
+
+</body>
+</html>
