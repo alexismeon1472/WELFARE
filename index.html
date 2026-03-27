@@ -48,13 +48,28 @@
 }
 
 .hero-text-box {
-  max-width: 760px;
-  margin: 0 auto 24px;
-  padding: 24px 28px;
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(4px);
-  border-radius: 16px;
+  max-width: 720px;
+  margin: 0 auto 28px;
+  padding: 26px 32px;
+
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 18px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}.hero-text-box p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.hero-signature {
+  margin-top: 12px;
+  opacity: 0.95;
 }
 
 .hero-text-box p {
@@ -67,9 +82,6 @@
   margin-bottom: 0;
 }
 
-.hero-signature {
-  margin-top: 10px;
-}
 
     /* LAYOUT */
     .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
@@ -211,8 +223,9 @@
     </p>
   </div>
 
-  <a href="#catalogue" class="btn-primary">Découvrir</a>
+  
 </div>
+    <a href="#catalogue" class="btn-primary">Découvrir</a>
   </header>
 
   <section id="catalogue" class="container">
