@@ -21,26 +21,55 @@
 
     /* HERO */
     .hero {
-      min-height: 52vh;
-      background: linear-gradient(rgba(7, 18, 32, 0.62), rgba(7, 18, 32, 0.62)),
-        url("https://i.postimg.cc/YqKh4713/IMG-6891.png")
-        center/cover no-repeat;
-      display: grid;
-      place-items: center;
-      padding: 32px 20px;
-    }
-    .hero-content { text-align: center; color: #fff; max-width: 900px; }
-    .hero h1 { font-size: clamp(1.9rem, 3vw, 2.6rem); margin-bottom: 10px; }
-    .hero p { font-size: clamp(1rem, 1.4vw, 1.15rem); opacity: 0.95; margin-bottom: 18px; }
-    .btn-primary {
-      display: inline-block;
-      padding: 12px 22px;
-      background: #0b6efd;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 700;
-    }
+  min-height: 62vh;
+  background:
+    linear-gradient(rgba(7, 18, 32, 0.58), rgba(7, 18, 32, 0.58)),
+    url("https://i.postimg.cc/YqKh4713/IMG-6891.png") center/cover no-repeat;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+  max-width: 900px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  margin-bottom: 12px;
+}
+
+.hero-intro {
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  opacity: 0.96;
+}
+
+.hero-text-box {
+  max-width: 760px;
+  margin: 0 auto 24px;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+}
+
+.hero-text-box p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.hero-text-box p:last-child {
+  margin-bottom: 0;
+}
+
+.hero-signature {
+  margin-top: 10px;
+}
 
     /* LAYOUT */
     .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
@@ -150,25 +179,40 @@
 
   <header class="hero">
     <div class="hero-content">
-      <h1>Catalogue de vidéos pédagogiques</h1>
-      <p>Bienvenue sur le site de l’étude WELFARE.<br><br>
+  <h1>Catalogue de vidéos pédagogiques</h1>
+  <p class="hero-intro">Bienvenue sur le site de l’étude WELFARE.</p>
 
-Votre proche vient d’être admis dans le service de neuro-réanimation du CHU de Caen.<br>
-À la suite de votre échange avec l’équipe soignante, vous avez accepté de participer à cette étude,
-qui vise à évaluer l’impact de vidéos d’information destinées aux proches de patients.<br><br>
+  <div class="hero-text-box">
+    <p>
+      Votre proche vient d’être admis dans le service de neuro-réanimation du CHU de Caen.
+    </p>
 
-Ces vidéos sont accessibles sur cette page grâce aux codes d’accès qui vous ont été transmis
-par le professionnel que vous venez de rencontrer.<br>
-Elles sont à votre disposition : vous pouvez les consulter librement, dans l’ordre de votre choix
-et autant de fois que vous le souhaitez.<br><br>
+    <p>
+      À la suite de votre échange avec l’équipe soignante, vous avez accepté de participer à cette étude,
+      qui vise à évaluer l’impact de vidéos d’information destinées aux proches de patients.
+    </p>
 
-Si vous avez des questions, n’hésitez pas à vous rapprocher des équipes médicales et paramédicales.<br><br>
+    <p>
+      Ces vidéos sont accessibles sur cette page grâce aux codes d’accès qui vous ont été transmis par le professionnel
+      que vous venez de rencontrer.
+    </p>
 
-Nous vous remercions chaleureusement pour votre participation et votre contribution à cette étude.<br><br>
+    <p>
+      Vous pouvez les consulter librement, dans l’ordre de votre choix, et autant de fois que vous le souhaitez.
+    </p>
 
-L’équipe WELFARE</p>
-      <a href="#catalogue" class="btn-primary">Découvrir</a>
-    </div>
+    <p>
+      Si vous avez des questions, n’hésitez pas à vous rapprocher des équipes médicales et paramédicales.
+    </p>
+
+    <p class="hero-signature">
+      Nous vous remercions chaleureusement pour votre participation à cette étude.<br>
+      <strong>L’équipe WELFARE</strong>
+    </p>
+  </div>
+
+  <a href="#catalogue" class="btn-primary">Découvrir</a>
+</div>
   </header>
 
   <section id="catalogue" class="container">
