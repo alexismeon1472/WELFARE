@@ -81,7 +81,92 @@
 .hero-text-box p:last-child {
   margin-bottom: 0;
 }
+.hero {
+  min-height: 52vh;
+  background: linear-gradient(rgba(7, 18, 32, 0.62), rgba(7, 18, 32, 0.62)),
+    url("https://i.postimg.cc/YqKh4713/IMG-6891.png")
+    center/cover no-repeat;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+}
 
+.hero-content {
+  text-align: center;
+  color: #fff;
+  max-width: 850px;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  margin-bottom: 10px;
+}
+
+.hero-intro {
+  font-size: 1.05rem;
+  opacity: 0.95;
+  margin-bottom: 12px;
+}
+
+.hero-summary {
+  max-width: 700px;
+  margin: 0 auto 22px;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.96);
+}
+
+.info-section {
+  padding: 56px 20px 20px;
+  background: #f7f9fb;
+}
+
+.info-box {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 36px 32px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.info-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.info-box p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  color: #334155;
+}
+
+.info-signature {
+  margin-top: 8px;
+}
+
+.info-actions {
+  text-align: center;
+  margin-top: 26px;
+}
+
+@media (max-width: 768px) {
+  .info-box {
+    padding: 26px 20px;
+  }
+
+  .info-box h2 {
+    font-size: 1.45rem;
+  }
+
+  .info-box p,
+  .hero-summary {
+    font-size: 1rem;
+  }
+}
 
     /* LAYOUT */
     .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
@@ -205,23 +290,32 @@
 <body>
 
   <header class="hero">
-    <div class="hero-content">
+   <div class="hero-content">
   <h1>Catalogue de vidéos pédagogiques</h1>
   <p class="hero-intro">Bienvenue sur le site de l’étude WELFARE.</p>
+  <p class="hero-summary">
+    Des vidéos d’information sont mises à votre disposition pour vous accompagner
+    à la suite de l’admission de votre proche en neuro-réanimation.
+  </p>
+</div>
+    <a href="#catalogue" class="btn-primary">Découvrir</a>
+  </header>
+<section id="info-etude" class="info-section">
+  <div class="info-box">
+    <h2>À propos de l’étude WELFARE</h2>
 
-  <div class="hero-text-box">
     <p>
       Votre proche vient d’être admis dans le service de neuro-réanimation du CHU de Caen.
     </p>
 
     <p>
-      À la suite de votre échange avec l’équipe soignante, vous avez accepté de participer à cette étude,
-      qui vise à évaluer l’impact de vidéos d’information destinées aux proches de patients.
+      À la suite de votre échange avec l’équipe soignante, vous avez accepté de participer
+      à une étude visant à évaluer l’impact de vidéos d’information destinées aux proches de patients.
     </p>
 
     <p>
-      Ces vidéos sont accessibles sur cette page grâce aux codes d’accès qui vous ont été transmis par le professionnel
-      que vous venez de rencontrer.
+      Ces vidéos sont accessibles sur cette page grâce aux codes d’accès qui vous ont été transmis
+      par le professionnel que vous venez de rencontrer.
     </p>
 
     <p>
@@ -232,17 +326,16 @@
       Si vous avez des questions, n’hésitez pas à vous rapprocher des équipes médicales et paramédicales.
     </p>
 
-    <p class="hero-signature">
-      Nous vous remercions chaleureusement pour votre participation à cette étude.<br>
+    <p class="info-signature">
+      Nous vous remercions chaleureusement pour votre participation et votre contribution à cette étude.<br>
       <strong>L’équipe WELFARE</strong>
     </p>
+
+    <div class="info-actions">
+      <a href="#catalogue" class="btn-primary">Accéder aux vidéos</a>
+    </div>
   </div>
-
-  
-</div>
-    <a href="#catalogue" class="btn-primary">Découvrir</a>
-  </header>
-
+</section>
   <section id="catalogue" class="container">
     <h2>Vidéos</h2>
 
